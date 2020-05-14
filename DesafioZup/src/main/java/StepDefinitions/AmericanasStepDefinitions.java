@@ -1,7 +1,20 @@
 package StepDefinitions;
+import static Utils.DriverFactory.getDriver;
+import static Utils.DriverFactory.killDriver;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+
 import Pages.cartPage;
 import Pages.homePage;
 import Pages.produtoPage;
+import io.cucumber.java.After;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -29,7 +42,7 @@ public class AmericanasStepDefinitions {
 		_produto = hp.clicarnoProduto(produto);
 	}
 
-	@When("adicionar o produto {string} ao carrinho")
+	@When("adicionar o produto ao carrinho")
 	public void adicionar_o_produto_mouse_ao_carrinho() {
 	    // Write code here that turns the phrase above into concrete actions
 		pp.addCarrinho();
@@ -48,7 +61,25 @@ public class AmericanasStepDefinitions {
 	    cp.validarProduto(_produto);
 	}
 
-
+	
+	@After(order = 1)
+	public void screenshot(Scenario cenario) {
+		File file = ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.FILE);
+		try {
+			String pathname = "target\\screenshot\\"+cenario.getName()+UUID.randomUUID().toString().substring(0, 5)+".jpg";
+			FileUtils.copyFile(file, new File(pathname));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	@After(order =0 )
+	public void fecharbrowser() {
+		killDriver();
+	}
+	
 
 	
 

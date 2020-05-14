@@ -12,7 +12,11 @@ import io.cucumber.junit.CucumberOptions.SnippetType;
 @CucumberOptions(
 		features = "src/main/java/features",
 		glue = "StepDefinitions",
-		plugin = {"pretty", "html:target/report-html"}
+		plugin = {"pretty", "html:target/report-html"},
+		monochrome = true,
+		snippets = SnippetType.CAMELCASE,
+		dryRun = false,
+		strict = false
 		)
 
 public class Runner {

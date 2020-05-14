@@ -23,6 +23,7 @@ public class homePage extends Base {
 	public void validarbuscadeproduto(String produto) {
 	
 		//*[@class='row product-grid no-gutters main-grid']/div[1]//h2,
+		elementPresent(By.xpath("//*[@class='row product-grid no-gutters main-grid']/div[1]//h2"));
 		String nameproduto = obterTexto(By.xpath("//*[@class='row product-grid no-gutters main-grid']/div[1]//h2")).toLowerCase();
 		if(!nameproduto.contains(produto.toLowerCase())) {
 			Assert.fail("O resultado não correspondeu a pesquisa.");
@@ -31,11 +32,16 @@ public class homePage extends Base {
 	}
 
 	public String clicarnoProduto(String produto) {
+		
+		
+		elementPresent(By.xpath("//*[@class='row product-grid no-gutters main-grid']/div[1]//h2"));
+
 		WebElement elem  = elemento(By.xpath("//*[@class='row product-grid no-gutters main-grid']/div[1]//h2"));
 		if (elem.getText().toLowerCase().contains(produto.toLowerCase())) {
 			
+			String txt = elem.getText();
 			elem.click();
-			return elem.getText();
+			return txt;
 			
 		}
 		else

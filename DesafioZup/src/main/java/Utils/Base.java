@@ -199,7 +199,7 @@ public boolean verificarElementoVisivelSelecionavel (By by) {
 		
 		
 		WebElement element;
-		WebDriverWait wait = new WebDriverWait (getDriver(),30);
+		WebDriverWait wait = new WebDriverWait (getDriver(),15);
 		element = wait.until(ExpectedConditions.presenceOfElementLocated((by)));
 		return element;
 	}
