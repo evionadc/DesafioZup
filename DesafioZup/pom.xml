@@ -5,10 +5,6 @@
 	<groupId>DesafioZup</groupId>
 	<artifactId>DesafioZup</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-
-
-
-
 	<dependencies>
 		<dependency>
 			<groupId>io.cucumber</groupId>
@@ -47,7 +43,7 @@
 					<includes>
 						<include>Runners/*.java</include>
 					</includes>
-					<parallel>all</parallel>
+					<parallel>methods</parallel>
 					<threadCount>3</threadCount>
 
 				</configuration>
@@ -55,14 +51,13 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.5.1</version>
-				<configuration>
-					<fork>true</fork>
-					<executable>C:\Program Files\Java\jdk-11.0.5\bin\javac.exe</executable>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
+				
 			</plugin>
 		</plugins>
 	</build>
+
+<properties>
+   <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+ </properties>
 
 </project>

@@ -26,7 +26,7 @@ public class homePage extends Base {
 		elementPresent(By.xpath("//*[@class='row product-grid no-gutters main-grid']/div[1]//h2"));
 		String nameproduto = obterTexto(By.xpath("//*[@class='row product-grid no-gutters main-grid']/div[1]//h2")).toLowerCase();
 		if(!nameproduto.contains(produto.toLowerCase())) {
-			Assert.fail("O resultado não correspondeu a pesquisa.");
+			Assert.fail("O resultado nao correspondeu a pesquisa.");
 		}
 		
 	}
@@ -46,7 +46,7 @@ public class homePage extends Base {
 		}
 		else
 		{
-			Assert.fail("Produto informado não localizado");
+			Assert.fail("Produto informado nao localizado");
 			return "";
 		}
 		

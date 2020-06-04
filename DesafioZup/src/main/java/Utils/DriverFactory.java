@@ -25,42 +25,42 @@ public class DriverFactory {
 
 	public static WebDriver initDriver() {
 		WebDriver driver = null;
-		String constantBrowser = "CHROME";
-		switch (constantBrowser) {
-		case "CHROME":
-			System.setProperty("webdriver.chrome.driver",
-					System.getProperty("user.dir") + "/resources/chromedriver.exe");
-			ChromeOptions options = new ChromeOptions();
-			// Disable extensions and hide infobars
-			options.addArguments("--disable-extensions");
-			options.addArguments("disable-infobars");
+		final Browsers browser = Browsers.Chrome;
+		switch (browser) {
+			case Chrome:
+				System.setProperty("webdriver.chrome.driver",
+						System.getProperty("user.dir") + "/resources/chromedriver.exe");
+				final ChromeOptions options = new ChromeOptions();
+				// Disable extensions and hide infobars
+				options.addArguments("--disable-extensions");
+				options.addArguments("disable-infobars");
 
-			Map<String, Object> prefs = new HashMap<String, Object>();
+				final Map<String, Object> prefs = new HashMap<String, Object>();
 
-			// Enable Flash
-			prefs.put("profile.default_content_setting_values.plugins", 1);
-			prefs.put("profile.content_settings.plugin_whitelist.adobe-flash-player", 1);
-			prefs.put("profile.content_settings.exceptions.plugins.*,*.per_resource.adobe-flash-player", 1);
+				// Enable Flash
+				prefs.put("profile.default_content_setting_values.plugins", 1);
+				prefs.put("profile.content_settings.plugin_whitelist.adobe-flash-player", 1);
+				prefs.put("profile.content_settings.exceptions.plugins.*,*.per_resource.adobe-flash-player", 1);
 
-			// Hide save credentials prompt
-			prefs.put("credentials_enable_service", false);
-			prefs.put("profile.password_manager_enabled", false);
-			options.setExperimentalOption("prefs", prefs);
-			driver = new ChromeDriver(options);
-			// driver = new ChromeDriver();
-			break;
+				// Hide save credentials prompt
+				prefs.put("credentials_enable_service", false);
+				prefs.put("profile.password_manager_enabled", false);
+				options.setExperimentalOption("prefs", prefs);
+				driver = new ChromeDriver(options);
+				// driver = new ChromeDriver();
+				break;
 
-		case "FIREFOX":
-			System.setProperty("webdriver.gecko.driver",
-					System.getProperty("user.dir") + "/resources/geckodriver.exe");
-			FirefoxOptions profile = new FirefoxOptions();
+			case Firefox:
+				System.setProperty("webdriver.gecko.driver",
+						System.getProperty("user.dir") + "/resources/geckodriver.exe");
+				final FirefoxOptions profile = new FirefoxOptions();
 			// As 0 is to disable, I used 1. I don"t know what to use.
 			profile.addPreference("dom.ipc.plugins.enabled.libflashplayer.so", "true");
 			driver = new FirefoxDriver(profile);
 			// driver = new FirefoxDriver ();
 			break;
 
-		case "IE":
+		case IE:
 			System.setProperty("webdriver.ie.driver",
 					System.getProperty("user.dir") + "/resources/IEDriverServer.exe");
 			driver = new InternetExplorerDriver();
@@ -81,5 +81,11 @@ public class DriverFactory {
 		if(threadDriver != null) {
 			threadDriver.remove();
 		}
+	}
+
+	public enum Browsers{
+		Chrome,
+		Firefox,
+		IE
 	}
 }
